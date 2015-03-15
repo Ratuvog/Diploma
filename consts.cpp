@@ -1,12 +1,7 @@
 #include "consts.h"
 
-Consts::Consts()
+double Utils::fluctuation(double mean, double dev)
 {
-
+    normal_distribution<double> distributor(mean, dev);
+    return distributor(generator);
 }
-
-Consts::~Consts()
-{
-
-}
-

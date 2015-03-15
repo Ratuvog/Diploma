@@ -1,12 +1,28 @@
 #ifndef EMULATOR_H
 #define EMULATOR_H
 
+#include <vector>
+#include <cmath>
+#include <iomanip>
+#include "point.h"
+#include "fiber.h"
+#include "probe.h"
 
-class Emulator
+using namespace std;
+
+class ReflectometerEmulator
 {
 public:
-    Emulator();
-    ~Emulator();
+    ReflectometerEmulator(const Fiber &_context, const Probe &_probe);
+
+    const vector<DPoint> &getTrace() const { return trace; }
+
+    void run();
+
+private:
+    Fiber fiber;
+    Probe probe;
+    vector<DPoint> trace;
 };
 
 #endif // EMULATOR_H

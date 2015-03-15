@@ -1,12 +1,28 @@
 #ifndef CONSTS_H
 #define CONSTS_H
 
+#include <random>
 
-class Consts
+using namespace std;
+
+namespace
+{
+    const double Deviation = 2e-4;
+    const double LightSpeed = 299792.; // km/sec
+    const int TraceResolution = 40; // meters
+
+    const double NoiseLength = 15; // km
+    const double NoiseAvgOffset = 6; // dB
+    const double NoiseDeviation = 0.6;
+
+    default_random_engine generator;
+}
+
+
+class Utils
 {
 public:
-    Consts();
-    ~Consts();
+    static double fluctuation(double mean, double dev);
 };
 
 #endif // CONSTS_H
