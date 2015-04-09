@@ -17,12 +17,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void readData();
-    void setup(QCustomPlot *customPlot);
+    void paintEvent(QPaintEvent *paintEvent);
 private:
     Ui::MainWindow *ui;
-    typedef QPair<QVector<double>, QVector<double> > Coords;
-    Coords data;
+    QPixmap background;
 };
 
 #endif // MAINWINDOW_H

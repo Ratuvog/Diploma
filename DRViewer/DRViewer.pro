@@ -14,13 +14,19 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-        qcustomplot.cpp
+        qcustomplot.cpp \
+    frame.cpp
 
 HEADERS  += mainwindow.h \
-            qcustomplot.h
+            qcustomplot.h \
+    frame.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    frame.ui
 
 DISTFILES += \
     ../build-DRViewer-Desktop_Qt_5_4_1_GCC_32bit-Debug/input.txt \
     input.txt
+
+RESOURCES += \
+    resource.qrc
