@@ -20,10 +20,10 @@ SOURCES += main.cpp\
         views/menubutton.cpp \
         views/abstractdomainview.cpp \
         views/menudomainview.cpp \
-        models/menudomainmodel.cpp \
     views/firstinfodomainview.cpp \
     views/secondinfodomainview.cpp \
-    views/thirdinfodomainview.cpp
+    views/thirdinfodomainview.cpp \
+    models/domainmodel.cpp
 
 HEADERS  += mainwindow.h \
             qcustomplot.h \
@@ -34,11 +34,11 @@ HEADERS  += mainwindow.h \
             views/abstractdomainview.h \
             models/domains.h \
             views/menudomainview.h \
-            models/menudomainmodel.h \
             models/abstractdomainmodel.h \
     views/firstinfodomainview.h \
     views/secondinfodomainview.h \
-    views/thirdinfodomainview.h
+    views/thirdinfodomainview.h \
+    models/domainmodel.h
 
 FORMS    += mainwindow.ui \
             frame.ui \

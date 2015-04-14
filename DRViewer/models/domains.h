@@ -19,6 +19,24 @@ enum Model {
     , Menu6thButtonValue
     , MenuDomainsEnd
 
+    , FirstInfoPointA
+    , FirstInfoPointB
+    , FirstInfoDistanceAB
+    , FirstInfoDomainsEnd
+
+    , SecondInfoLoss
+    , SecondInfoReflect
+    , SecondInfoDomainsEnd
+
+    , ThirdInfoWL
+    , ThirdInfoDR
+    , ThirdInfoPW
+    , ThirdInfoIOR
+    , ThirdInfoRES
+    , ThirdInfoAVG
+    , ThirdInfoDomainsEnd
+
+    , DomainsEnd
 
 };
 

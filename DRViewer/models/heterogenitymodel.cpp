@@ -2,6 +2,10 @@
 
 HeterogenityModel::HeterogenityModel()
 {
+    items.append(HeterogenityItem());
+    items.append(HeterogenityItem());
+    items.append(HeterogenityItem());
+    items.append(HeterogenityItem());
 }
 
 int HeterogenityModel::rowCount(const QModelIndex &) const
@@ -28,7 +32,7 @@ QVariant HeterogenityModel::data(const QModelIndex &index, int role) const
     {
         switch (index.column())
         {
-        case NumberColumn: return index.column() + 1;
+        case NumberColumn: return index.row() + 1;
         case DistanceColumn: return item.dist;
         case TypeColumn: return item.type;
         case LossColumn: return item.loss;

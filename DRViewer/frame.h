@@ -27,6 +27,9 @@ public slots:
 
 private:
     void createMenu(MenuDomainView *menu);
+    void setFirstInfo(QWidget *widget);
+    void setSecondInfo(QWidget *widget);
+    void setThirdInfo(QWidget *widget);
 
 private:
     typedef QPair<QVector<double>, QVector<double> > Coords;

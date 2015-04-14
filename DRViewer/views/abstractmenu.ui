@@ -131,7 +131,7 @@
   <customwidget>
    <class>MenuButton</class>
    <extends>QWidget</extends>
-   <header>menubutton.h</header>
+   <header location="global">views/menubutton.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

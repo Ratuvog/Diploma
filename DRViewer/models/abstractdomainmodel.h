@@ -2,18 +2,18 @@
 #define ABSTRACTDOMAINMODEL
 
 #include <qabstractitemmodel.h>
+#include "models/domains.h"
 
 class AbstractDomainModel : public QAbstractTableModel
 {
+protected:
+    virtual QVariant transform(int domain, const QVariant &data) const = 0;
+    virtual QVariant defaultValue(int domain) const = 0;
+
 public:
     int columnCount(const QModelIndex &) const
     {
         return 1;
-    }
-
-    int rowCount(const QModelIndex &parent = QModelIndex()) const
-    {
-        return m_data.size();
     }
 
     QVariant data(const QModelIndex &index, int) const
@@ -23,7 +23,11 @@ public:
         if (index.row() < 0 || index.row() >= rowCount())
             return QVariant();
 
-        return m_data[index.row()];
+        QVariant data = m_data.value(index.row());
+        if (!data.isValid())
+            return defaultValue(index.row());
+
+        return transform(index.row(), data);
     }
 
     bool setData(const QModelIndex &index, const QVariant &value, int role)
@@ -38,11 +42,8 @@ public:
         return QAbstractTableModel::setData(index, value, role);
     }
 
-    void initialize(QHash<int, QVariant> data) { m_data = data; }
-
-private:
+protected:
     QHash<int, QVariant> m_data;
-
 };
 
 #endif // ABSTRACTDOMAINMODEL

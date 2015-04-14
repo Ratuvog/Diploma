@@ -4,7 +4,10 @@
 #include "reader.h"
 #include "views/menudomainview.h"
 #include "models/heterogenitymodel.h"
-#include "models/menudomainmodel.h"
+#include "views/firstinfodomainview.h"
+#include "views/secondinfodomainview.h"
+#include "views/thirdinfodomainview.h"
+#include <models/domainmodel.h>
 
 Frame::Frame(QWidget *parent, ReaderInterface *reader)
     : QWidget(parent),
@@ -14,10 +17,25 @@ Frame::Frame(QWidget *parent, ReaderInterface *reader)
 
     ui->table->setModel(new HeterogenityModel());
     ui->table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->table->horizontalHeader()->setMaximumHeight(20);
 
-    MenuDomainView * menu = new MenuDomainView(this);
-    menu->setModel(new MenuDomainModel);
+    QAbstractItemModel *model = new DomainModel;
+
+    MenuDomainView *menu = new MenuDomainView(this);
+    menu->setModel(model);
     createMenu(menu);
+
+    AbstractDomainView *info = new FirstInfoDomainView(this);
+    info->setModel(model);
+    setFirstInfo(info);
+
+    info = new SecondInfoDomainView(this);
+    info->setModel(model);
+    setSecondInfo(info);
+
+    info = new ThirdInfoDomainView(this);
+    info->setModel(model);
+    setThirdInfo(info);
 
     readData();
     setup(ui->plot);
@@ -36,6 +54,21 @@ void Frame::createMenu(MenuDomainView *menu)
     connect(menu, SIGNAL(clickToFour()), this, SLOT(fourClicked()));
     connect(menu, SIGNAL(clickToFive()), this, SLOT(fiveClicked()));
     connect(menu, SIGNAL(clickToSix()), this, SLOT(sixClicked()));
+}
+
+void Frame::setFirstInfo(QWidget *widget)
+{
+    ui->info1th->addWidget(widget);
+}
+
+void Frame::setSecondInfo(QWidget *widget)
+{
+    ui->info2th->addWidget(widget);
+}
+
+void Frame::setThirdInfo(QWidget *widget)
+{
+    ui->info3th->addWidget(widget);
 }
 
 Frame::~Frame()
