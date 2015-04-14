@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AbstractMenu</class>
+ <widget class="QWidget" name="AbstractMenu">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>80</width>
+    <height>323</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="MenuButton" name="pushButton" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>80</width>
+       <height>53</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>80</width>
+       <height>57</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="MenuButton" name="pushButton_2" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>80</width>
+       <height>53</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>80</width>
+       <height>57</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="MenuButton" name="pushButton_3" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>80</width>
+       <height>53</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>80</width>
+       <height>57</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="MenuButton" name="pushButton_4" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>80</width>
+       <height>53</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>80</width>
+       <height>57</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="MenuButton" name="pushButton_5" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>80</width>
+       <height>53</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>80</width>
+       <height>57</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="MenuButton" name="pushButton_6" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>80</width>
+       <height>53</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>80</width>
+       <height>57</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MenuButton</class>
+   <extends>QWidget</extends>
+   <header>menubutton.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

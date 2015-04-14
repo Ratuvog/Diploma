@@ -8,12 +8,14 @@ namespace Ui {
 }
 
 class QCustomPlot;
+class ReaderInterface;
+class MenuDomainView;
 
 class Frame : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Frame(QWidget *parent = 0);
+    Frame(QWidget *parent, ReaderInterface *reader);
     ~Frame();
 
     void readData();
@@ -22,6 +24,9 @@ public:
 signals:
 
 public slots:
+
+private:
+    void createMenu(MenuDomainView *menu);
 
 private:
     typedef QPair<QVector<double>, QVector<double> > Coords;

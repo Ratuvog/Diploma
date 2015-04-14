@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->exitButton->setAttribute(Qt::WA_TranslucentBackground);
     ui->exitButton->setStyleSheet("background: transparent;\noutline: 0;");
 
-    ui->stackedWidget->addWidget(new Frame(this));
+    ui->stackedWidget->addWidget(new Frame(this, 0));
 }
 
 void MainWindow::paintEvent(QPaintEvent *)
