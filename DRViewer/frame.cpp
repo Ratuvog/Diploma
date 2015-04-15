@@ -8,6 +8,7 @@
 #include "views/secondinfodomainview.h"
 #include "views/thirdinfodomainview.h"
 #include <models/domainmodel.h>
+#include "plot.h"
 
 Frame::Frame(QWidget *parent, ReaderInterface *reader)
     : QWidget(parent),
@@ -15,9 +16,9 @@ Frame::Frame(QWidget *parent, ReaderInterface *reader)
 {
     ui->setupUi(this);
 
-    ui->table->setModel(new HeterogenityModel());
     ui->table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->table->horizontalHeader()->setMaximumHeight(20);
+    ui->table->hide();
 
     QAbstractItemModel *model = new DomainModel;
 
@@ -94,38 +95,79 @@ void Frame::readData()
     }
 }
 
-void Frame::setup(QCustomPlot *customPlot)
+void Frame::setup(Plot *customPlot)
 {
-  // create graph and assign data to it:
-  customPlot->addGraph();
-  customPlot->graph(0)->setData(data.first, data.second);
+    // create graph and assign data to it:
+    customPlot->addGraph();
+    customPlot->graph(0)->setData(data.first, data.second);
 
-  QPen pen;
-  pen.setWidth(1);
-  pen.setColor(QColor(255,0,0));
-  customPlot->graph(0)->setPen(pen);
+    customPlot->setup();
 
-  // give the axes some labels:
-  customPlot->xAxis->setLabel("km");
-  customPlot->yAxis->setLabel("dB");
+    QPen pen;
+    pen.setWidth(1);
+    pen.setColor(QColor(255,0,0));
+    customPlot->graph(0)->setPen(pen);
 
-  // set axes ranges, so we see all data:
-  customPlot->xAxis->setRange(0, 100);
-  customPlot->yAxis->setRange(0, -100);
+    customPlot->graph(0)->rescaleAxes();
+}
 
-  customPlot->xAxis2->setVisible(true);
-  customPlot->xAxis2->setTickLabels(false);
-  customPlot->yAxis2->setVisible(true);
-  customPlot->yAxis2->setTickLabels(false);
+void Frame::oneClicked()
+{
 
-  // make left and bottom axes always transfer their ranges to right and top axes:
-  connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), customPlot->xAxis2, SLOT(setRange(QCPRange)));
-  connect(customPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), customPlot->yAxis2, SLOT(setRange(QCPRange)));
+}
 
-  // let the ranges scale themselves so graph 0 fits perfectly in the visible area:
-  customPlot->graph(0)->rescaleAxes();
+void Frame::twoClicked()
+{
 
-  // Allow user to drag axis ranges with mouse, zoom with mouse wheel and select graphs by clicking:
-  customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+}
+
+void Frame::threeClicked()
+{
+
+}
+
+void Frame::fourClicked()
+{
+
+}
+
+void Frame::fiveClicked()
+{
+
+}
+
+void Frame::sixClicked()
+{
+
+}
+
+void Frame::enterClicked()
+{
+    ui->plot->addCursor(ui->plot->cursorX());
+}
+
+void Frame::escClicked()
+{
+    ui->plot->removeCursor(ui->plot->currentCursor());
+}
+
+void Frame::leftClicked()
+{
+    ui->plot->prevCursor();
+}
+
+void Frame::rightClicked()
+{
+    ui->plot->nextCursor();
+}
+
+void Frame::scrollUp()
+{
+    ui->plot->moveUpCursor();
+}
+
+void Frame::scrollDown()
+{
+    ui->plot->moveDownCursor();
 }
 

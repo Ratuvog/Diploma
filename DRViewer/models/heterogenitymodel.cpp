@@ -2,10 +2,6 @@
 
 HeterogenityModel::HeterogenityModel()
 {
-    items.append(HeterogenityItem());
-    items.append(HeterogenityItem());
-    items.append(HeterogenityItem());
-    items.append(HeterogenityItem());
 }
 
 int HeterogenityModel::rowCount(const QModelIndex &) const

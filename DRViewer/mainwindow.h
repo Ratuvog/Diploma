@@ -2,12 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <qpushbutton.h>
 
 namespace Ui {
 class MainWindow;
 }
 
 class QCustomPlot;
+class Frame;
 
 class MainWindow : public QMainWindow
 {
@@ -18,9 +20,15 @@ public:
     ~MainWindow();
 
     void paintEvent(QPaintEvent *paintEvent);
+    bool eventFilter(QObject *o, QEvent *e);
+
+private:
+    void setTransparent(QWidget *button);
+
 private:
     Ui::MainWindow *ui;
     QPixmap background;
+    Frame *frame;
 };
 
 #endif // MAINWINDOW_H

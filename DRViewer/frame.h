@@ -7,7 +7,7 @@ namespace Ui {
     class Frame;
 }
 
-class QCustomPlot;
+class Plot;
 class ReaderInterface;
 class MenuDomainView;
 
@@ -19,11 +19,26 @@ public:
     ~Frame();
 
     void readData();
-    void setup(QCustomPlot *customPlot);
+    void setup(Plot *customPlot);
 
 signals:
 
 public slots:
+    void oneClicked();
+    void twoClicked();
+    void threeClicked();
+    void fourClicked();
+    void fiveClicked();
+    void sixClicked();
+
+    void enterClicked();
+    void escClicked();
+
+    void leftClicked();
+    void rightClicked();
+
+    void scrollUp();
+    void scrollDown();
 
 private:
     void createMenu(MenuDomainView *menu);

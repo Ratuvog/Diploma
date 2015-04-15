@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     views/firstinfodomainview.cpp \
     views/secondinfodomainview.cpp \
     views/thirdinfodomainview.cpp \
-    models/domainmodel.cpp
+    models/domainmodel.cpp \
+    plot.cpp \
+    wheel.cpp
 
 HEADERS  += mainwindow.h \
             qcustomplot.h \
@@ -38,7 +40,9 @@ HEADERS  += mainwindow.h \
     views/firstinfodomainview.h \
     views/secondinfodomainview.h \
     views/thirdinfodomainview.h \
-    models/domainmodel.h
+    models/domainmodel.h \
+    plot.h \
+    wheel.h
 
 FORMS    += mainwindow.ui \
             frame.ui \
