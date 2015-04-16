@@ -4,7 +4,7 @@
 #include <QAbstractItemModel>
 
 
-class ReaderInterface;
+class ReflectogramReaderInterface;
 
 class HeterogenityModel : public  QAbstractTableModel
 {

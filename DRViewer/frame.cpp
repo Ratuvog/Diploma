@@ -8,9 +8,10 @@
 #include "views/secondinfodomainview.h"
 #include "views/thirdinfodomainview.h"
 #include <models/domainmodel.h>
+#include "cursorgraph.h"
 #include "plot.h"
 
-Frame::Frame(QWidget *parent, ReaderInterface *reader)
+Frame::Frame(QWidget *parent, ReflectogramReaderInterface *reader)
     : QWidget(parent),
       ui(new Ui::Frame),
       m_selectedCursor(0)
@@ -39,7 +40,7 @@ Frame::Frame(QWidget *parent, ReaderInterface *reader)
     info->setModel(model);
     setThirdInfo(info);
 
-    readData();
+    readData(reader);
     setup(ui->plot);
 }
 
@@ -78,20 +79,12 @@ Frame::~Frame()
     delete ui;
 }
 
-void Frame::readData()
+void Frame::readData(ReflectogramReaderInterface *reader)
 {
-    QFile f("/home/ratuvog/input.txt");
-    if (!f.open(QIODevice::ReadOnly))
-        return;
-
-    QTextStream stream(&f);
-    int size = 0;
-    stream >> size;
-    for(int i = 0; i < size && !stream.atEnd(); i++)
+    while (reader->hasNext())
     {
-        double x, y;
-        stream >> x >> y;
-        m_reflectogram.addPoint(x, y);
+        QPointF p = reader->nextPoint();
+        m_reflectogram.addPoint(p.x(), p.y());
     }
 }
 
@@ -154,7 +147,7 @@ void Frame::selectCursor(CursorGraph *cursor)
 
 void Frame::enterClicked()
 {
-    Cursor *cursorModel = new Cursor(&m_reflectogram);
+    CursorModel *cursorModel = new CursorModel(&m_reflectogram);
     // set same value to new cursor from current selected cursor
     if (m_selectedCursor)
         cursorModel->setX(m_selectedCursor->model()->x());

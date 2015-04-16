@@ -1,6 +1,7 @@
 #include "frame.h"
 #include "mainwindow.h"
 #include "qcustomplot.h"
+#include "reflectogramreader.h"
 #include "ui_mainwindow.h"
 
 void MainWindow::setTransparent(QWidget *button)
@@ -40,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setTransparent(ui->right);
     setTransparent(ui->down);
 
-    frame = new Frame(this, 0);
+    frame = new Frame(this, new ReflectogramReader("/home/ratuvog/input.txt"));
     connect(ui->f1, SIGNAL(clicked()), frame, SLOT(oneClicked()));
     connect(ui->f2, SIGNAL(clicked()), frame, SLOT(twoClicked()));
     connect(ui->f3, SIGNAL(clicked()), frame, SLOT(threeClicked()));

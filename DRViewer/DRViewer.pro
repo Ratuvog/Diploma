@@ -25,7 +25,12 @@ SOURCES += main.cpp\
     views/thirdinfodomainview.cpp \
     models/domainmodel.cpp \
     plot.cpp \
-    wheel.cpp
+    wheel.cpp \
+    cursormodel.cpp \
+    cursorgraph.cpp \
+    reflectogram.cpp \
+    labelprovider.cpp \
+    reflectogramreader.cpp
 
 HEADERS  += mainwindow.h \
             qcustomplot.h \
@@ -42,7 +47,12 @@ HEADERS  += mainwindow.h \
     views/thirdinfodomainview.h \
     models/domainmodel.h \
     plot.h \
-    wheel.h
+    wheel.h \
+    cursormodel.h \
+    cursorgraph.h \
+    reflectogram.h \
+    labelprovider.h \
+    reflectogramreader.h
 
 FORMS    += mainwindow.ui \
             frame.ui \
