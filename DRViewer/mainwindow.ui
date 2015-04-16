@@ -88,6 +88,12 @@
     <property name="text">
      <string/>
     </property>
+    <property name="shortcut">
+     <string>1</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
+    </property>
     <property name="autoDefault">
      <bool>false</bool>
     </property>
@@ -115,6 +121,12 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="shortcut">
+     <string>2</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
     </property>
     <property name="autoDefault">
      <bool>false</bool>
@@ -144,6 +156,12 @@
     <property name="text">
      <string/>
     </property>
+    <property name="shortcut">
+     <string>3</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
+    </property>
     <property name="autoDefault">
      <bool>false</bool>
     </property>
@@ -171,6 +189,12 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="shortcut">
+     <string>4</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
     </property>
     <property name="autoDefault">
      <bool>false</bool>
@@ -200,6 +224,12 @@
     <property name="text">
      <string/>
     </property>
+    <property name="shortcut">
+     <string>5</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
+    </property>
     <property name="autoDefault">
      <bool>false</bool>
     </property>
@@ -227,6 +257,12 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="shortcut">
+     <string>6</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
     </property>
     <property name="autoDefault">
      <bool>false</bool>
@@ -256,6 +292,12 @@
     <property name="text">
      <string/>
     </property>
+    <property name="shortcut">
+     <string>Esc</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
+    </property>
     <property name="autoDefault">
      <bool>false</bool>
     </property>
@@ -283,6 +325,12 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="shortcut">
+     <string>Return</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
     </property>
     <property name="autoDefault">
      <bool>false</bool>
@@ -312,6 +360,12 @@
     <property name="text">
      <string/>
     </property>
+    <property name="shortcut">
+     <string>Left</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
+    </property>
     <property name="autoDefault">
      <bool>false</bool>
     </property>
@@ -339,6 +393,12 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="shortcut">
+     <string>Up</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
     </property>
     <property name="autoDefault">
      <bool>false</bool>
@@ -368,6 +428,12 @@
     <property name="text">
      <string/>
     </property>
+    <property name="shortcut">
+     <string>Right</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
+    </property>
     <property name="autoDefault">
      <bool>false</bool>
     </property>
@@ -395,6 +461,12 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="shortcut">
+     <string>Down</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
     </property>
     <property name="autoDefault">
      <bool>false</bool>
@@ -424,6 +496,12 @@
     <property name="text">
      <string/>
     </property>
+    <property name="shortcut">
+     <string>F1</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
+    </property>
     <property name="autoDefault">
      <bool>false</bool>
     </property>
@@ -451,6 +529,12 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="shortcut">
+     <string>F2</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
     </property>
     <property name="autoDefault">
      <bool>false</bool>
@@ -480,6 +564,12 @@
     <property name="text">
      <string/>
     </property>
+    <property name="shortcut">
+     <string>F3</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
+    </property>
     <property name="autoDefault">
      <bool>false</bool>
     </property>
@@ -507,6 +597,12 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="shortcut">
+     <string>F4</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>true</bool>
     </property>
     <property name="autoDefault">
      <bool>false</bool>

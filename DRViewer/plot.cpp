@@ -1,8 +1,7 @@
 #include "plot.h"
 
 Plot::Plot(QWidget *parent)
-    : QCustomPlot(parent),
-      m_currentCursor()
+    : QCustomPlot(parent)
 {
 }
 
@@ -27,95 +26,6 @@ void Plot::setup()
 
     // Allow user to drag axis ranges with mouse, zoom with mouse wheel and select graphs by clicking:
     //setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
-}
-
-void Plot::nextCursor()
-{
-    m_currentCursor++;
-    m_currentCursor %= cursors.count();
-}
-
-void Plot::prevCursor()
-{
-    m_currentCursor--;
-    m_currentCursor += cursors.count();
-    m_currentCursor %= cursors.count();
-}
-
-void Plot::selectCursor(int i)
-{
-    if (i < 0 || i >= cursors.count())
-        return;
-
-    m_currentCursor = i;
-}
-
-int Plot::currentCursor()
-{
-    return m_currentCursor;
-}
-
-double Plot::cursorX()
-{
-    if (cursors.count() == 0)
-        return 0;
-
-    return cursors[m_currentCursor].x;
-}
-
-void Plot::moveUpCursor()
-{
-    moveCursor(xAxis->tickStep()/20.);
-}
-
-void Plot::moveDownCursor()
-{
-    moveCursor(-xAxis->tickStep()/20.);
-}
-
-void Plot::moveCursor(double step)
-{
-    if (cursors.count() == 0)
-        return;
-
-    cursors[m_currentCursor].x += step;
-    double x = cursors[m_currentCursor].x;
-
-    QCPGraph *g = cursors[m_currentCursor].graph;
-    g->clearData();
-    g->addData(x, -65536);
-    g->addData(x, 65536);
-    replot();
-
-    emit cursorUpdated(m_currentCursor, cursors[m_currentCursor].x);
-}
-
-void Plot::addCursor(double x)
-{
-    cursors.append(Cursor(addGraph(), x));
-
-    graph()->addData(x, -65536);
-    graph()->addData(x, 65536);
-
-    QPen pen;
-    pen.setWidth(1);
-    pen.setColor(QColor(255,0,0));
-    graph()->setPen(pen);
-
-    m_currentCursor = cursors.size() - 1;
-    replot();
-}
-
-void Plot::removeCursor(int i)
-{
-    if (i < 0 || i >= cursors.count())
-        return;
-
-    removeGraph(cursors[i].graph);
-    cursors.removeAt(i);
-
-    m_currentCursor = cursors.size() - 1;
-    replot();
 }
 
 

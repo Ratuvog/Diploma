@@ -12,7 +12,8 @@
 
 Frame::Frame(QWidget *parent, ReaderInterface *reader)
     : QWidget(parent),
-      ui(new Ui::Frame)
+      ui(new Ui::Frame),
+      m_selectedCursor(0)
 {
     ui->setupUi(this);
 
@@ -90,8 +91,7 @@ void Frame::readData()
     {
         double x, y;
         stream >> x >> y;
-        data.first.push_back(x);
-        data.second.push_back(y);
+        m_reflectogram.addPoint(x, y);
     }
 }
 
@@ -99,7 +99,7 @@ void Frame::setup(Plot *customPlot)
 {
     // create graph and assign data to it:
     customPlot->addGraph();
-    customPlot->graph(0)->setData(data.first, data.second);
+    customPlot->graph(0)->setData(m_reflectogram.keys(), m_reflectogram.values());
 
     customPlot->setup();
 
@@ -107,8 +107,8 @@ void Frame::setup(Plot *customPlot)
     pen.setWidth(1);
     pen.setColor(QColor(255,0,0));
     customPlot->graph(0)->setPen(pen);
-
     customPlot->graph(0)->rescaleAxes();
+
 }
 
 void Frame::oneClicked()
@@ -141,33 +141,95 @@ void Frame::sixClicked()
 
 }
 
+void Frame::selectCursor(CursorGraph *cursor)
+{
+    if (m_selectedCursor)
+        m_selectedCursor->unselect();
+
+    cursor->select();
+
+    m_selectedCursor = cursor;
+    ui->plot->replot();
+}
+
 void Frame::enterClicked()
 {
-    ui->plot->addCursor(ui->plot->cursorX());
+    Cursor *cursorModel = new Cursor(&m_reflectogram);
+    // set same value to new cursor from current selected cursor
+    if (m_selectedCursor)
+        cursorModel->setX(m_selectedCursor->model()->x());
+
+    CursorGraph *cursor = new CursorGraph(
+        ui->plot->addGraph(),
+        cursorModel,
+        m_labelProvider.borrowNext()
+    );
+
+    m_cursors.append(cursor);
+    selectCursor(cursor);
+
+    ui->plot->replot();
 }
 
 void Frame::escClicked()
 {
-    ui->plot->removeCursor(ui->plot->currentCursor());
+    if (!m_selectedCursor)
+        return;
+
+    m_labelProvider.release(m_selectedCursor->labelText());
+
+    m_cursors.removeAll(m_selectedCursor);
+    delete m_selectedCursor;
+
+    m_selectedCursor = 0;
+    if (m_cursors.count())
+        selectCursor(m_cursors.back());
+
+    ui->plot->replot();
 }
 
 void Frame::leftClicked()
 {
-    ui->plot->prevCursor();
+    if (!m_selectedCursor)
+        return;
+
+    int index = m_cursors.indexOf(m_selectedCursor);
+    index--;
+    index += m_cursors.count();
+    index %= m_cursors.count();
+
+    selectCursor(m_cursors[index]);
 }
 
 void Frame::rightClicked()
 {
-    ui->plot->nextCursor();
+    if (!m_selectedCursor)
+        return;
+
+    int index = m_cursors.indexOf(m_selectedCursor);
+    index++;
+    index %= m_cursors.count();
+
+    selectCursor(m_cursors[index]);
 }
 
 void Frame::scrollUp()
 {
-    ui->plot->moveUpCursor();
+    if (!m_selectedCursor)
+        return;
+
+    m_selectedCursor->move(m_selectedCursor->moveStep());
+
+    ui->plot->replot();
 }
 
 void Frame::scrollDown()
 {
-    ui->plot->moveDownCursor();
+    if (!m_selectedCursor)
+        return;
+
+    m_selectedCursor->move(-m_selectedCursor->moveStep());
+
+    ui->plot->replot();
 }
 
