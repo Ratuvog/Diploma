@@ -11,6 +11,8 @@ public:
     const QVector<double>& values() const { return m_y; }
 
     double value(double x) const;
+    double beginValue() const;
+    double lenght() const;
 
 private:
     QVector<double> m_x;

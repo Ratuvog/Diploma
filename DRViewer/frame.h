@@ -9,6 +9,7 @@ class Plot;
 class ReflectogramReaderInterface;
 class MenuDomainView;
 class CursorGraph;
+class DomainModel;
 
 namespace Ui {
     class Frame;
@@ -43,6 +44,8 @@ public slots:
     void scrollUp();
     void scrollDown();
 
+    void cursorUpdated();
+
 private:
     void createMenu(MenuDomainView *menu);
 
@@ -60,6 +63,7 @@ private:
 
     QList<CursorGraph*> m_cursors;
     CursorGraph *m_selectedCursor;
+    DomainModel *m_infoModel;
 };
 
 #endif // FRAME_H

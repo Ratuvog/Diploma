@@ -19,8 +19,8 @@ void ThirdInfoDomainView::update(int domain)
     using namespace Domain;
     QString display = model()->data(model()->index(domain, 0)).toString();
     switch (domain) {
-        case ThirdInfoWL:  ui->wl->setText(display); break;
-        case ThirdInfoDR:  ui->dr->setText(display); break;
+        case ReflectogramWaveLenght:  ui->wl->setText(display); break;
+        case ReflectogramLineLenght:  ui->dr->setText(display); break;
         case ThirdInfoPW:  ui->pw->setText(display); break;
         case ThirdInfoIOR: ui->ior->setText(display); break;
         case ThirdInfoRES: ui->res->setText(display); break;
@@ -31,6 +31,6 @@ void ThirdInfoDomainView::update(int domain)
 
 void ThirdInfoDomainView::updateAll()
 {
-    for(int i = Domain::ThirdInfoWL; i < Domain::ThirdInfoDomainsEnd; ++i)
+    for(int i = Domain::ReflectogramWaveLenght; i < Domain::ThirdInfoDomainsEnd; ++i)
         update(i);
 }

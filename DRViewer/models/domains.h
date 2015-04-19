@@ -19,17 +19,17 @@ enum Model {
     , Menu6thButtonValue
     , MenuDomainsEnd
 
-    , FirstInfoPointA
-    , FirstInfoPointB
-    , FirstInfoDistanceAB
+    , CursorPointA
+    , CursorPointB
+    , CursorDistanceAB
     , FirstInfoDomainsEnd
 
-    , SecondInfoLoss
-    , SecondInfoReflect
+    , CursorLoss
+    , CursorReflect
     , SecondInfoDomainsEnd
 
-    , ThirdInfoWL
-    , ThirdInfoDR
+    , ReflectogramWaveLenght
+    , ReflectogramLineLenght
     , ThirdInfoPW
     , ThirdInfoIOR
     , ThirdInfoRES

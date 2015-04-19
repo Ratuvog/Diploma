@@ -9,7 +9,6 @@ class AbstractDomainView : public QWidget
     Q_OBJECT
 public:
     explicit AbstractDomainView(QWidget *parent = 0);
-    virtual ~AbstractDomainView();
 
     void setModel(QAbstractItemModel *model);
     QAbstractItemModel *model() const;

@@ -22,22 +22,22 @@ Frame::Frame(QWidget *parent, ReflectogramReaderInterface *reader)
     ui->table->horizontalHeader()->setMaximumHeight(20);
     ui->table->hide();
 
-    QAbstractItemModel *model = new DomainModel;
+    m_infoModel = new DomainModel;
 
     MenuDomainView *menu = new MenuDomainView(this);
-    menu->setModel(model);
+    menu->setModel(m_infoModel);
     createMenu(menu);
 
     AbstractDomainView *info = new FirstInfoDomainView(this);
-    info->setModel(model);
+    info->setModel(m_infoModel);
     setFirstInfo(info);
 
     info = new SecondInfoDomainView(this);
-    info->setModel(model);
+    info->setModel(m_infoModel);
     setSecondInfo(info);
 
     info = new ThirdInfoDomainView(this);
-    info->setModel(model);
+    info->setModel(m_infoModel);
     setThirdInfo(info);
 
     readData(reader);
@@ -77,6 +77,7 @@ void Frame::setThirdInfo(QWidget *widget)
 Frame::~Frame()
 {
     delete ui;
+    delete m_infoModel;
 }
 
 void Frame::readData(ReflectogramReaderInterface *reader)
@@ -86,6 +87,8 @@ void Frame::readData(ReflectogramReaderInterface *reader)
         QPointF p = reader->nextPoint();
         m_reflectogram.addPoint(p.x(), p.y());
     }
+    m_infoModel->setReflectogram(&m_reflectogram);
+    m_infoModel->updateAll();
 }
 
 void Frame::setup(Plot *customPlot)
@@ -143,11 +146,14 @@ void Frame::selectCursor(CursorGraph *cursor)
 
     m_selectedCursor = cursor;
     ui->plot->replot();
+    cursorUpdated();
 }
 
 void Frame::enterClicked()
 {
     CursorModel *cursorModel = new CursorModel(&m_reflectogram);
+    connect(cursorModel, SIGNAL(updated()), SLOT(cursorUpdated()));
+
     // set same value to new cursor from current selected cursor
     if (m_selectedCursor)
         cursorModel->setX(m_selectedCursor->model()->x());
@@ -224,5 +230,18 @@ void Frame::scrollDown()
     m_selectedCursor->move(-m_selectedCursor->moveStep());
 
     ui->plot->replot();
+}
+
+void Frame::cursorUpdated()
+{
+    CursorModel *cursorA = 0, *cursorB = 0;
+    if (m_cursors.count() > 0)
+        cursorA = m_cursors[0]->model();
+    if (m_cursors.count() > 1)
+        cursorB = m_cursors[1]->model();
+
+    m_infoModel->setCursorA(cursorA);
+    m_infoModel->setCursorB(cursorB);
+    m_infoModel->updateAll();
 }
 

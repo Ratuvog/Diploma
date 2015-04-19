@@ -26,9 +26,9 @@ void CursorGraph::updateGraph()
     m_graph->addData(m_cursor->x(), -65536);
     m_graph->addData(m_cursor->x(), 65536);
     m_label->position->setCoords(
-                m_cursor->x(),
-                m_graph->parentPlot()->yAxis->range().upper
-                );
+        m_cursor->x(),
+        m_graph->parentPlot()->yAxis->range().upper
+    );
 }
 
 double CursorGraph::moveStep() const {

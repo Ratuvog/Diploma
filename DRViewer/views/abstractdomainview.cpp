@@ -7,11 +7,6 @@ AbstractDomainView::AbstractDomainView(QWidget *parent)
 
 }
 
-AbstractDomainView::~AbstractDomainView()
-{
-    disconnectModel();
-}
-
 void AbstractDomainView::disconnectModel()
 {
     if (m_model)
