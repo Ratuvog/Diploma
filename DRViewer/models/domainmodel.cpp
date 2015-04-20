@@ -77,8 +77,8 @@ QVariant DomainModel::data(const QModelIndex &index, int role) const
             value = cursorA->value();
         break;
     case Domain::CursorLoss:
-        if (cursorA && cursorB)
-            value = qAbs(cursorA->value() - cursorB->value());
+        if (cursorA && cursorB && cursorA->x() - cursorB->x() != 0)
+            value = qAbs(cursorA->value() - cursorB->value()) / qAbs(cursorA->x() - cursorB->x());
         else if (cursorA)
             value = cursorA->loss();
         break;

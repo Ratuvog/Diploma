@@ -9,10 +9,7 @@ struct Faker
 {
     static Fiber fiber()
     {
-        Fiber f;
-        f.setLength(85);
-        f.setAtteniation(0.24);
-        return f;
+        return Fiber();
     }
 
     static Probe probe()
@@ -41,6 +38,7 @@ int main()
     const string outputFile = "/home/ratuvog/input.txt";
     OutputProcessor op(outputFile);
     op.writeTrace(emul.getTrace());
+//
     op.close();
 
     return 0;

@@ -9,7 +9,7 @@ namespace
 {
     const double Deviation = 2e-4;
     const double LightSpeed = 299792.; // km/sec
-    const int TraceResolution = 40; // meters
+    const double TraceResolution = 40; // meters
 
     const double NoiseLength = 15; // km
     const double NoiseAvgOffset = 6; // dB

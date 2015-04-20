@@ -9,30 +9,52 @@ ReflectometerEmulator::ReflectometerEmulator(const Fiber &_context,
 {
 }
 
+double ReflectometerEmulator::traceStep() const {
+    return TraceResolution / 1000;
+}
+
 void ReflectometerEmulator::run()
 {
-    const int noiseSize = NoiseLength / probe.getPulseDuration() / LightSpeed;
-    const int traceSize = fiber.getLength() / probe.getPulseDuration() / LightSpeed;
-    trace.resize(traceSize+noiseSize);
+    double beginX = 0, beginY = 0;
 
-    const double traceResolution = fiber.getLength() / traceSize;
-    double step = 0;
-    for(int i = 0; i < traceSize; ++i)
+    vector<Heterogenity> heterogenities = fiber.getHeterogenities();
+    for(int i = 0; i < heterogenities.size(); ++i)
     {
-        DPoint p;
-        p.x = (double)(i + 1) * traceResolution;
-        p.y = -Utils::fluctuation(fiber.getAttenuation(p.x, traceResolution), Deviation) * p.x;
-        step += fiber.getAttenuationIncrease(p.x, traceResolution);
-        p.y += probe.getInputPulsePower() + step;
-        trace[i] = p;
+        Heterogenity h = heterogenities[i];
+        double beginEvent = h.eventX - beginX;
+        for(double stepX = 0; stepX < beginEvent; stepX += traceStep())
+        {
+            DPoint point;
+
+            point.x = stepX + beginX;
+            point.y = - Utils::fluctuation(h.attenuation, Deviation) * stepX + beginY;
+
+            cout << point.x << " " << point.y << endl;
+            trace.push_back(point);
+        }
+
+        DPoint last = trace.back();
+        DPoint up;
+        up.x = last.x + traceStep();
+        up.y = Utils::fluctuation(h.reflection, Deviation) * traceStep() + last.y;
+        trace.push_back(up);
+
+        DPoint down;
+        down.x = last.x + 2 * traceStep();
+        down.y = -Utils::fluctuation(h.attenuation, Deviation) * traceStep() + last.y - h.loss;
+        trace.push_back(down);
+
+        beginX = down.x;
+        beginY = down.y;
     }
 
-    for(int i = traceSize; i < traceSize+noiseSize; ++i)
+    for (double stepX = 0; stepX < NoiseLength; stepX += traceStep())
     {
-        DPoint p;
-        p.x = (double)(i + 1) * traceResolution;
-        p.y = Utils::fluctuation(trace[traceSize-1].y - NoiseAvgOffset, NoiseDeviation);
-        trace[i] = p;
-    }
+        DPoint point;
 
+        point.x = stepX + beginX;
+        point.y = Utils::fluctuation(beginY - NoiseAvgOffset, NoiseDeviation);
+
+        trace.push_back(point);
+    }
 }

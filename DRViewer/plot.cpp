@@ -25,7 +25,7 @@ void Plot::setup()
     connect(yAxis, SIGNAL(rangeChanged(QCPRange)), yAxis2, SLOT(setRange(QCPRange)));
 
     // Allow user to drag axis ranges with mouse, zoom with mouse wheel and select graphs by clicking:
-    //setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+    setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
 }
 
 

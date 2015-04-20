@@ -19,6 +19,7 @@ public:
 
     void run();
 
+    double traceStep() const;
 private:
     Fiber fiber;
     Probe probe;

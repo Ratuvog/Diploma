@@ -1,16 +1,20 @@
 #ifndef FIBER_H
 #define FIBER_H
 
-#include <map>
+#include "point.h"
+
+#include <vector>
 
 using namespace std;
 
-struct FiberHeterogenity
+struct Heterogenity
 {
-    double attenuation;
+    double eventX;
+
     double reflection;
-    FiberHeterogenity(double a = 0., double r = 0.)
-        : attenuation(a), reflection(r) {}
+    double loss;
+
+    double attenuation;
 };
 
 class Fiber
@@ -18,21 +22,10 @@ class Fiber
 public:
     Fiber();
 
-    //! Длина ОВ в километрах
-    double getLength() const { return length; }
-    void setLength(double length) { this->length = length; }
-
-    void addHeterogenity(double x, const FiberHeterogenity &het);
-
-    //! Коэффициент затухания ОВ в дБ/км
-    double getAttenuation(double x, double eps) const;
-    void setAtteniation(double attn) { attenuation = attn; }
-
-    double getAttenuationIncrease(double x, double eps) const;
-
+    void addHeterogenity(const Heterogenity &het);
+    vector<Heterogenity> getHeterogenities() const;
 private:
-    double length;
-    double attenuation;
-    map<double, FiberHeterogenity> heterogenities;
+    double range;
+    vector<Heterogenity> heterogenities;
 };
 #endif // FIBER_H

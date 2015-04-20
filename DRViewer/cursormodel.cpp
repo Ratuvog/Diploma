@@ -13,7 +13,10 @@ double CursorModel::value() const
 
 double CursorModel::loss() const
 {
-    return qAbs(m_refl->beginValue() - value());
+    if (x() == 0)
+        return 0;
+
+    return qAbs(m_refl->beginValue() - value()) / x();
 }
 
 void CursorModel::setX(double value)

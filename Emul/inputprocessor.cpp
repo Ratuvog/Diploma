@@ -14,17 +14,13 @@ void InputProcessor::close()
 
 void InputProcessor::readFiber(Fiber &fiber)
 {
-    double lenght = 0.;
-    cin >> lenght;
-    fiber.setLength(lenght);
-
     int keyPointsCount = 0;
     cin >> keyPointsCount;
     for(int i = 0; i < keyPointsCount; ++i)
     {
-        double x, a, r;
-        cin >> x >> a >> r;
-        fiber.addHeterogenity(x, FiberHeterogenity(a, r));
+        Heterogenity event;
+        cin >> event.eventX >> event.loss >> event.reflection >> event.attenuation;
+        fiber.addHeterogenity(event);
     }
 }
 
