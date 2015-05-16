@@ -6,22 +6,36 @@ void Reflectogram::addPoint(double x, double y) {
 }
 
 double Reflectogram::value(double x) const {
-    QVector<double>::const_iterator low = std::lower_bound(m_x.begin(), m_x.end(), x);
+
+    QVector<double>::const_iterator low;
+    double find = x;
+    do {
+        low = std::lower_bound(m_x.begin(), m_x.end(), find);
+        if (low == m_x.end())
+            return 0;
+
+        if (low == m_x.begin())
+            return 0;
+
+        find = *(--low);
+    } while (*low > x);
+
     QVector<double>::const_iterator up = std::upper_bound(m_x.begin(), m_x.end(), x);
-
-    if (low == m_x.end())
-        return 0;
-
-    if (*low == x)
-        return m_y[low - m_x.begin()];
-
     if (up == m_x.end())
         return 0;
 
-    if (up == m_x.begin())
+    double y2,y1,x2,x1;
+    y2 = m_y[up - m_x.begin()];
+    y1 = m_y[low - m_x.begin()];
+    x2 = *up;
+    x1 = *low;
+
+    if (x2 == x1)
         return 0;
 
-    return (m_y[up - m_x.begin()] + m_y[(--low) - m_x.begin()] ) / 2.;
+    double k = (y2 - y1) / (x2 - x1);
+    double b = y1 - (y2 - y1) / (x2 - x1) * x1;
+    return k * x + b;
 }
 
 double Reflectogram::beginValue() const

@@ -14,6 +14,9 @@ void InputProcessor::close()
 
 void InputProcessor::readFiber(Fiber &fiber)
 {
+    int range;
+    cin >> range;
+
     int keyPointsCount = 0;
     cin >> keyPointsCount;
     for(int i = 0; i < keyPointsCount; ++i)

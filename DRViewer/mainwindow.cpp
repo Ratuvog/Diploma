@@ -51,6 +51,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->left, SIGNAL(clicked()), frame, SLOT(leftClicked()));
     connect(ui->right, SIGNAL(clicked()), frame, SLOT(rightClicked()));
+    connect(ui->up, SIGNAL(clicked()), frame, SLOT(upClicked()));
+    connect(ui->down, SIGNAL(clicked()), frame, SLOT(downClicked()));
 
     connect(ui->enter, SIGNAL(clicked()), frame, SLOT(enterClicked()));
     connect(ui->esc, SIGNAL(clicked()), frame, SLOT(escClicked()));

@@ -40,6 +40,8 @@ public slots:
 
     void leftClicked();
     void rightClicked();
+    void upClicked();
+    void downClicked();
 
     void scrollUp();
     void scrollDown();

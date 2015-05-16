@@ -7,9 +7,9 @@ using namespace std;
 
 namespace
 {
-    const double Deviation = 2e-4;
+    const double Deviation = 2e-2;
     const double LightSpeed = 299792.; // km/sec
-    const double TraceResolution = 40; // meters
+    const double TraceResolution = 5; // meters
 
     const double NoiseLength = 15; // km
     const double NoiseAvgOffset = 6; // dB
@@ -25,4 +25,4 @@ public:
     static double fluctuation(double mean, double dev);
 };
 
-#endif // CONSTS_H
+#endif // CONSTS_H`

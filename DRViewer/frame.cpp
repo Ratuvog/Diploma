@@ -105,6 +105,26 @@ void Frame::setup(Plot *customPlot)
     customPlot->graph(0)->setPen(pen);
     customPlot->graph(0)->rescaleAxes();
 
+    for(int i = 0 ; i < 2; ++i) {
+    CursorModel *cursorModel = new CursorModel(&m_reflectogram);
+    connect(cursorModel, SIGNAL(updated()), SLOT(cursorUpdated()));
+
+    // set same value to new cursor from current selected cursor
+    if (m_selectedCursor)
+        cursorModel->setX(m_selectedCursor->model()->x());
+
+    CursorGraph *cursor = new CursorGraph(
+        ui->plot->addGraph(),
+        cursorModel,
+        m_labelProvider.borrowNext()
+    );
+
+    m_cursors.append(cursor);
+    selectCursor(cursor);
+    }
+
+    ui->plot->replot();
+
 }
 
 void Frame::oneClicked()
@@ -151,23 +171,15 @@ void Frame::selectCursor(CursorGraph *cursor)
 
 void Frame::enterClicked()
 {
-    CursorModel *cursorModel = new CursorModel(&m_reflectogram);
-    connect(cursorModel, SIGNAL(updated()), SLOT(cursorUpdated()));
+    if (!m_selectedCursor)
+        return;
 
-    // set same value to new cursor from current selected cursor
-    if (m_selectedCursor)
-        cursorModel->setX(m_selectedCursor->model()->x());
+    int index = m_cursors.indexOf(m_selectedCursor);
+    index--;
+    index += m_cursors.count();
+    index %= m_cursors.count();
 
-    CursorGraph *cursor = new CursorGraph(
-        ui->plot->addGraph(),
-        cursorModel,
-        m_labelProvider.borrowNext()
-    );
-
-    m_cursors.append(cursor);
-    selectCursor(cursor);
-
-    ui->plot->replot();
+    selectCursor(m_cursors[index]);
 }
 
 void Frame::escClicked()
@@ -189,27 +201,26 @@ void Frame::escClicked()
 
 void Frame::leftClicked()
 {
-    if (!m_selectedCursor)
-        return;
-
-    int index = m_cursors.indexOf(m_selectedCursor);
-    index--;
-    index += m_cursors.count();
-    index %= m_cursors.count();
-
-    selectCursor(m_cursors[index]);
+    ui->plot->scaleX(1.17);
+    ui->plot->replot();
 }
 
 void Frame::rightClicked()
 {
-    if (!m_selectedCursor)
-        return;
+    ui->plot->scaleX(0.84);
+    ui->plot->replot();
+}
 
-    int index = m_cursors.indexOf(m_selectedCursor);
-    index++;
-    index %= m_cursors.count();
+void Frame::upClicked()
+{
+    ui->plot->scaleY(0.84);
+    ui->plot->replot();
+}
 
-    selectCursor(m_cursors[index]);
+void Frame::downClicked()
+{
+    ui->plot->scaleY(1.17);
+    ui->plot->replot();
 }
 
 void Frame::scrollUp()

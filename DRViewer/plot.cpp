@@ -28,5 +28,13 @@ void Plot::setup()
     setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
 }
 
+void Plot::scaleX(double f)
+{
+    xAxis->scaleRange(f, xAxis->range().center());
+}
 
+void Plot::scaleY(double f)
+{
+    yAxis->scaleRange(f, yAxis->range().center());
+}
 

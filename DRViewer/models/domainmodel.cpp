@@ -16,7 +16,7 @@ DomainModel::DomainModel()
     m_data[Menu3thButtonLabel] = "Wavelength";
     m_data[Menu3thButtonValue] = "1550";
     m_data[Menu4thButtonLabel] = "Range / Pulse width";
-    m_data[Menu4thButtonValue] = "100 km / 4 us [HR]";
+    m_data[Menu4thButtonValue] = "100 km / 5 ns [HR]";
     m_data[Menu5thButtonLabel] = "Display From";
     m_data[Menu5thButtonValue] = "Origin";
     m_data[Menu6thButtonLabel] = "More >>";
@@ -73,18 +73,29 @@ QVariant DomainModel::data(const QModelIndex &index, int role) const
             value = qAbs(cursorA->x() - cursorB->x());
         break;
     case Domain::CursorReflect:
-        if (cursorA)
-            value = cursorA->value();
+        value = QVariant();
         break;
     case Domain::CursorLoss:
         if (cursorA && cursorB && cursorA->x() - cursorB->x() != 0)
-            value = qAbs(cursorA->value() - cursorB->value()) / qAbs(cursorA->x() - cursorB->x());
-        else if (cursorA)
-            value = cursorA->loss();
+            value = qAbs(cursorA->value() - cursorB->value());
         break;
     case Domain::ReflectogramLineLenght:
         if (m_refl)
-            value = m_refl->lenght();
+            value = 85.;
+        break;
+    case Domain::ReflectogramWaveLenght:
+        value = 1550;
+        break;
+    case Domain::ThirdInfoPW:
+        value = 5;
+        break;
+    case Domain::ThirdInfoIOR:
+        value = 1.45;
+        break;
+    case Domain::ThirdInfoRES:
+        value = 5;
+        break;
+    case Domain::ThirdInfoAVG:
         break;
     default:
         return AbstractDomainModel::data(index, role);
@@ -100,7 +111,7 @@ QVariant DomainModel::transform(int domain, const QVariant &data) const
 {
     switch (domain) {
     case Domain::ReflectogramWaveLenght:
-        return data.toString() + " nm SM";
+        return data.toString() + " nm";
     case Domain::CursorPointA:
     case Domain::CursorPointB:
     case Domain::CursorDistanceAB:
@@ -110,7 +121,9 @@ QVariant DomainModel::transform(int domain, const QVariant &data) const
     case Domain::CursorReflect:
         return QString::number(data.toDouble(), 'f', 4);
     case Domain::ThirdInfoPW:
-        return data.toString() + " us[HR]";
+        return data.toString() + " us";
+    case Domain::ThirdInfoRES:
+        return QString::number(data.toDouble(), 'f', 4) + " m";
     default:
         break;
     }

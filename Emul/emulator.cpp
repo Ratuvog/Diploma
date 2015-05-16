@@ -27,21 +27,20 @@ void ReflectometerEmulator::run()
             DPoint point;
 
             point.x = stepX + beginX;
-            point.y = - Utils::fluctuation(h.attenuation, Deviation) * stepX + beginY;
+            point.y = - Utils::fluctuation(h.attenuation * stepX, Deviation) + beginY;
 
-            cout << point.x << " " << point.y << endl;
             trace.push_back(point);
         }
 
         DPoint last = trace.back();
         DPoint up;
         up.x = last.x + traceStep();
-        up.y = Utils::fluctuation(h.reflection, Deviation) * traceStep() + last.y;
+        up.y = Utils::fluctuation(h.reflection * traceStep(), Deviation) + last.y;
         trace.push_back(up);
 
         DPoint down;
         down.x = last.x + 2 * traceStep();
-        down.y = -Utils::fluctuation(h.attenuation, Deviation) * traceStep() + last.y - h.loss;
+        down.y = -Utils::fluctuation(h.attenuation * traceStep(), Deviation) + last.y - h.loss;
         trace.push_back(down);
 
         beginX = down.x;
