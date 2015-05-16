@@ -14,6 +14,7 @@ void MainWindow::setTransparent(QWidget *button)
 
 QString MainWindow::getFileName()
 {
+    return qApp->arguments().at(1);
     return QFileDialog::getOpenFileName(this, QString(), QString(), "*.txt");
 }
 
