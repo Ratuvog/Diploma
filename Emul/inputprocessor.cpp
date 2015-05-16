@@ -1,10 +1,12 @@
 #include <cstdio>
 #include <iostream>
+#include <io.h>
 #include "inputprocessor.h"
 
 InputProcessor::InputProcessor(const string &filename)
 {
     freopen(filename.data(), "r", stdin);
+    m_isValid = access(filename.data(), 0) != -1;
 }
 
 void InputProcessor::close()

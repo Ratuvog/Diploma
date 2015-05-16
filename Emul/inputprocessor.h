@@ -17,6 +17,10 @@ public:
     void readFiber(Fiber &fiber);
     void readProbe(Probe &probe);
 
+    bool isValid() const { return m_isValid;}
+
+private:
+    bool m_isValid;
 };
 
 #endif // INPUTPROCESSOR_H

@@ -1,6 +1,6 @@
 #include "domainmodel.h"
-#include "cursormodel.h"
-#include "reflectogram.h"
+#include "../cursormodel.h"
+#include "../reflectogram.h"
 
 DomainModel::DomainModel()
     : cursorA(0),

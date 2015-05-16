@@ -1,6 +1,6 @@
 #include "secondinfodomainview.h"
 #include "ui_secondinfodomainview.h"
-#include "models/domains.h"
+#include "domains.h"
 
 SecondInfoDomainView::SecondInfoDomainView(QWidget *parent) :
     AbstractDomainView(parent),

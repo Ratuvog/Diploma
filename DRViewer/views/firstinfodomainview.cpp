@@ -1,5 +1,5 @@
 #include "firstinfodomainview.h"
-#include "models/domains.h"
+#include "domains.h"
 #include "ui_firstinfodomainview.h"
 
 FirstInfoDomainView::FirstInfoDomainView(QWidget *parent) :

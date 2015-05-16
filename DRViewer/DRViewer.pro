@@ -4,13 +4,12 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
+QT       += core gui widgets printsupport
 
 TARGET = DRViewer
 TEMPLATE = app
 
+INCLUDEPATH += .. models views
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -20,17 +19,17 @@ SOURCES += main.cpp\
         views/menubutton.cpp \
         views/abstractdomainview.cpp \
         views/menudomainview.cpp \
-    views/firstinfodomainview.cpp \
-    views/secondinfodomainview.cpp \
-    views/thirdinfodomainview.cpp \
-    models/domainmodel.cpp \
-    plot.cpp \
-    wheel.cpp \
-    cursormodel.cpp \
-    cursorgraph.cpp \
-    reflectogram.cpp \
-    labelprovider.cpp \
-    reflectogramreader.cpp
+        views/firstinfodomainview.cpp \
+        views/secondinfodomainview.cpp \
+        views/thirdinfodomainview.cpp \
+        models/domainmodel.cpp \
+        plot.cpp \
+        wheel.cpp \
+        cursormodel.cpp \
+        cursorgraph.cpp \
+        reflectogram.cpp \
+        labelprovider.cpp \
+        reflectogramreader.cpp
 
 HEADERS  += mainwindow.h \
             qcustomplot.h \
@@ -42,29 +41,25 @@ HEADERS  += mainwindow.h \
             models/domains.h \
             views/menudomainview.h \
             models/abstractdomainmodel.h \
-    views/firstinfodomainview.h \
-    views/secondinfodomainview.h \
-    views/thirdinfodomainview.h \
-    models/domainmodel.h \
-    plot.h \
-    wheel.h \
-    cursormodel.h \
-    cursorgraph.h \
-    reflectogram.h \
-    labelprovider.h \
-    reflectogramreader.h
+            views/firstinfodomainview.h \
+            views/secondinfodomainview.h \
+            views/thirdinfodomainview.h \
+            models/domainmodel.h \
+            plot.h \
+            wheel.h \
+            cursormodel.h \
+            cursorgraph.h \
+            reflectogram.h \
+            labelprovider.h \
+            reflectogramreader.h
 
 FORMS    += mainwindow.ui \
             frame.ui \
             views/abstractmenu.ui \
             views/menubutton.ui \
-    views/firstinfodomainview.ui \
-    views/secondinfodomainview.ui \
-    views/thirdinfodomainview.ui
-
-DISTFILES += \
-    ../build-DRViewer-Desktop_Qt_5_4_1_GCC_32bit-Debug/input.txt \
-    input.txt
+            views/firstinfodomainview.ui \
+            views/secondinfodomainview.ui \
+            views/thirdinfodomainview.ui
 
 RESOURCES += \
     resource.qrc

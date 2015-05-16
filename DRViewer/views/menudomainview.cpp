@@ -1,6 +1,6 @@
 #include "ui_abstractmenu.h"
 #include "menudomainview.h"
-#include "models/domains.h"
+#include "domains.h"
 
 MenuDomainView::MenuDomainView(QWidget *parent)
     : AbstractDomainView(parent),

@@ -19,11 +19,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    bool initialize();
     void paintEvent(QPaintEvent *paintEvent);
     bool eventFilter(QObject *o, QEvent *e);
 
 private:
     void setTransparent(QWidget *button);
+    QString getFileName();
 
 private:
     Ui::MainWindow *ui;

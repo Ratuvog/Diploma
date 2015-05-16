@@ -5,6 +5,9 @@
 
 ReflectogramReader::ReflectogramReader(const QString &fileName)
 {
+    if (fileName.isEmpty() || !QFile::exists(fileName))
+        return;
+
     QFile f(fileName);
     if (!f.open(QIODevice::ReadOnly))
         return;
@@ -18,12 +21,12 @@ ReflectogramReader::ReflectogramReader(const QString &fileName)
         stream >> x >> y;
         data.append(QPointF(x, y));
     }
-    pointer = data.cbegin();
+    pointer = data.constBegin();
 }
 
 bool ReflectogramReader::hasNext() const
 {
-    return pointer != data.cend();
+    return pointer != data.constEnd();
 }
 
 QPointF ReflectogramReader::nextPoint()

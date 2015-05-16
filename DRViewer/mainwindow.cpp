@@ -1,3 +1,5 @@
+#include <QBitmap>
+#include <QFileDialog>
 #include "frame.h"
 #include "mainwindow.h"
 #include "qcustomplot.h"
@@ -10,12 +12,18 @@ void MainWindow::setTransparent(QWidget *button)
     button->setStyleSheet("background: transparent;\noutline: 0;");
 }
 
+QString MainWindow::getFileName()
+{
+    return QFileDialog::getOpenFileName(this, QString(), QString(), "*.txt");
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     background(QPixmap(":/bg.png"))
 {
     ui->setupUi(this);
+
     QSize windowSize(1100, 740);
     setMask(background.scaled(windowSize).mask());
     setMinimumSize(windowSize);
@@ -41,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setTransparent(ui->right);
     setTransparent(ui->down);
 
-    frame = new Frame(this, new ReflectogramReader("/home/ratuvog/input.txt"));
+    frame = new Frame(this);
     connect(ui->f1, SIGNAL(clicked()), frame, SLOT(oneClicked()));
     connect(ui->f2, SIGNAL(clicked()), frame, SLOT(twoClicked()));
     connect(ui->f3, SIGNAL(clicked()), frame, SLOT(threeClicked()));
@@ -59,8 +67,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->scroll, SIGNAL(up()), frame, SLOT(scrollUp()));
     connect(ui->scroll, SIGNAL(down()), frame, SLOT(scrollDown()));
+    connect(ui->scroll, SIGNAL(clicked()), frame, SLOT(enterClicked()));
 
     ui->stackedWidget->addWidget(frame);
+}
+
+bool MainWindow::initialize() {
+    QString filename = getFileName();
+    if (filename.isEmpty()) {
+        return false;
+    }
+
+    ReflectogramReader reader(filename);
+    frame->readData(&reader);
+    return true;
 }
 
 void MainWindow::paintEvent(QPaintEvent *)
@@ -76,7 +96,7 @@ MainWindow::~MainWindow()
 
 bool MainWindow::eventFilter(QObject *o, QEvent *e)
 {
-    if (o == ui->scroll && e->type() == QEvent::Scroll)
+    if (o == ui->scroll && e->type() == QEvent::Wheel)
     {
         frame->eventFilter(o, e);
         return true;

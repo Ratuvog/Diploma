@@ -22,14 +22,27 @@ struct Faker
     }
 };
 
-int main()
+int main(int argc, char **argv)
 {
     Fiber fiber = Faker::fiber();
     Probe probe = Faker::probe();
 
-    const string inputFile = "/home/ratuvog/settings.txt";
-    cerr << "Reading configure file..." << endl;
+    if (argc < 3)
+    {
+        cout << "Not enought args" << endl;
+        return 0;
+    }
+
+    for(int i = 0; i < argc; ++i) cout << argv[i] << endl;
+
+    const string inputFile(argv[1]);
+    //cerr << "Reading configure file..." << endl;
     InputProcessor ip(inputFile);
+    if (!ip.isValid()) {
+        cout << "Configure file is not exists" << endl;
+        return 1;
+    }
+
     ip.readFiber(fiber);
     ip.readProbe(probe);
     cerr << "Input file is valid " << endl << endl;
@@ -39,7 +52,8 @@ int main()
     cerr << "Emulation successful done. Reflectogram has " << emul.getTrace().size() << " points" << endl;
     cerr << endl;
     cerr << "Write output file..." << endl;
-    const string outputFile = "/home/ratuvog/input.txt";
+    const string outputFile(argv[2]);
+
     OutputProcessor op(outputFile);
     op.writeTrace(emul.getTrace());
     cerr << "Output file was created" << endl;

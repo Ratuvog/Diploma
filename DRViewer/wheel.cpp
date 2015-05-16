@@ -8,9 +8,14 @@ Wheel::Wheel(QWidget *parent)
 
 }
 
+void Wheel::mousePressEvent(QMouseEvent *)
+{
+    emit clicked();
+}
+
 void Wheel::wheelEvent(QWheelEvent *e)
 {
-    int delta = e->angleDelta().y();
+    int delta = e->delta();
     if (delta < 0)
         emit down();
     else if (delta > 0)

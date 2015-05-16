@@ -2,7 +2,7 @@
 #define ABSTRACTDOMAINMODEL
 
 #include <qabstractitemmodel.h>
-#include "models/domains.h"
+#include "domains.h"
 
 class AbstractDomainModel : public QAbstractTableModel
 {

@@ -19,7 +19,7 @@ class Frame : public QWidget
 {
     Q_OBJECT
 public:
-    Frame(QWidget *parent, ReflectogramReaderInterface *reader);
+    Frame(QWidget *parent);
     ~Frame();
 
     void readData(ReflectogramReaderInterface *reader);

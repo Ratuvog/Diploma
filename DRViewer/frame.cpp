@@ -7,11 +7,11 @@
 #include "views/firstinfodomainview.h"
 #include "views/secondinfodomainview.h"
 #include "views/thirdinfodomainview.h"
-#include <models/domainmodel.h>
+#include <domainmodel.h>
 #include "cursorgraph.h"
 #include "plot.h"
 
-Frame::Frame(QWidget *parent, ReflectogramReaderInterface *reader)
+Frame::Frame(QWidget *parent)
     : QWidget(parent),
       ui(new Ui::Frame),
       m_selectedCursor(0)
@@ -40,8 +40,6 @@ Frame::Frame(QWidget *parent, ReflectogramReaderInterface *reader)
     info->setModel(m_infoModel);
     setThirdInfo(info);
 
-    readData(reader);
-    setup(ui->plot);
 }
 
 void Frame::createMenu(MenuDomainView *menu)
@@ -89,6 +87,8 @@ void Frame::readData(ReflectogramReaderInterface *reader)
     }
     m_infoModel->setReflectogram(&m_reflectogram);
     m_infoModel->updateAll();
+
+    setup(ui->plot);
 }
 
 void Frame::setup(Plot *customPlot)
